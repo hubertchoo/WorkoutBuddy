@@ -23,7 +23,6 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     // MARK: TABLEVIEW functions
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        print("here1")
         return 1
     }
 
