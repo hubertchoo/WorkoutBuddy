@@ -17,7 +17,7 @@ WorkoutBuddy will then guide you through your own workout, through every set and
 
 ### Editing Your Exercises
 
-![Editing Your Exercises GIF](/Workouts/App Demo/Editing your exercises.gif)
+![Editing Your Exercises GIF](/App Demo/Editing your exercises.gif)
 
 
 
