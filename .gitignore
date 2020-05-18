@@ -1,4 +1,5 @@
 *.xcodeproj/xcuserdata/
+*.xcodeproj/xcshareddata/xcschemes
 
 # Ignore misc OS files...
 .DS_Store
