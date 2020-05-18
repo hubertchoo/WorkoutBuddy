@@ -22,8 +22,21 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         WorkoutsTable.delegate = self
         WorkoutsTable.dataSource = self
         // Do any additional setup after loading the view.
-        workouts.append([WorkoutExerciseStruct(name: "Pull U", sets: "5", reps: "5", rest: "5"), WorkoutExerciseStruct(name: "Sit U", sets: "5", reps: "5", rest: "5")])
-        workoutNames.append("Workout 1")
+        workouts.append([WorkoutExerciseStruct(name: "Bench Press", sets: "5", reps: "10", rest: "5"), WorkoutExerciseStruct(name: "Push Ups", sets: "3", reps: "5", rest: "10")])
+        workoutNames.append("Example Workout")
+        
+        let defaults = UserDefaults.standard
+        if let storedWorkouts = defaults.object(forKey: "workouts") as? Data {
+            if let decodedWorkouts = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(storedWorkouts) as? [[WorkoutExerciseStruct]] {
+                workouts = decodedWorkouts
+            }
+        }
+        if let storedNames = defaults.object(forKey: "workoutNames") as? Data {
+            if let decodedNames = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(storedNames) as? [String] {
+                workoutNames = decodedNames
+            }
+        }
+        
         
     }
     
@@ -53,6 +66,7 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         workoutNames[workoutIndex] = senderView.WorkoutNameField.text!
         
         WorkoutsTable.reloadData()
+        self.save()
     }
     
     @IBAction func startWorkoutSegue(sender: UIStoryboardSegue){
@@ -61,6 +75,7 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         workouts[workoutIndex] = senderView.selExercises
         workoutNames[workoutIndex] = senderView.WorkoutNameField.text!
         WorkoutsTable.reloadData()
+        self.save()
         DispatchQueue.main.async() {
             self.performSegue(withIdentifier: "beginWorkoutSegue", sender: nil)
         }
@@ -73,6 +88,7 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let workoutIndex = senderView.workoutIndex
         workouts.remove(at: workoutIndex)
         workoutNames.remove(at: workoutIndex)
+        self.save()
         WorkoutsTable.reloadData()
     }
         
@@ -91,6 +107,7 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = WorkoutsTable.dequeueReusableCell(withIdentifier: "WorkoutCell", for: indexPath)
         cell.textLabel?.text = workoutNames[indexPath.row]
+        cell.selectionStyle = .none
         return cell
 
     }
@@ -102,6 +119,8 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
             dest.selExercises = workouts[indexPath!.row]
             dest.workoutName = workoutNames[indexPath!.row]
             dest.workoutIndex = indexPath!.row
+            dest.allWorkouts = workouts
+            dest.allWorkoutNames = workoutNames
         }
         if segue.identifier == "beginWorkoutSegue" {
             let dest = segue.destination as! SixthViewController
@@ -110,6 +129,7 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
     }
     
+
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath)
     {
         let verticalPadding: CGFloat = 8
@@ -120,10 +140,24 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         maskLayer.frame = CGRect(x: cell.bounds.origin.x, y: cell.bounds.origin.y, width: cell.bounds.width, height: cell.bounds.height).insetBy(dx: 0, dy: verticalPadding/2)
         cell.layer.mask = maskLayer
     }
+
     
     @IBAction func unwindEndWorkout(segue: UIStoryboardSegue){
         return
     }
 
+    func save() {
+        // save workouts
+        if let savedData = try? NSKeyedArchiver.archivedData(withRootObject: workouts, requiringSecureCoding: false) {
+            let defaults = UserDefaults.standard
+            defaults.set(savedData, forKey: "workouts")
+        }
+        // save workout names
+        if let savedData = try? NSKeyedArchiver.archivedData(withRootObject: workoutNames, requiringSecureCoding: false) {
+            let defaults = UserDefaults.standard
+            defaults.set(savedData, forKey: "workoutNames")
+        }
+    }
+    
 }
 

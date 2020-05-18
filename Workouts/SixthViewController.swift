@@ -15,6 +15,7 @@ class SixthViewController: UIViewController {
     @IBOutlet weak var RestLabel: UILabel!
     @IBOutlet weak var WorkoutProgressBar: UIProgressView!
     @IBOutlet weak var NextButton: UIButton!
+    @IBOutlet weak var NextExerciseLabel: UILabel!
     
     var exInWorkout = [WorkoutExerciseStruct]()
     var currExerciseIndex = 0
@@ -38,7 +39,11 @@ class SixthViewController: UIViewController {
         for exerciseStruct in exInWorkout{
             totalSets += Int(exerciseStruct.sets!)!
             WorkoutProgressBar.progress = 0.0
-            
+        }
+        if currExerciseIndex == exInWorkout.count - 1{
+            NextExerciseLabel.text = "Next Exercise: End of Workout"
+        } else {
+            NextExerciseLabel.text = "Next Exercise: " + exInWorkout[currExerciseIndex+1].name
         }
     }
     
@@ -62,7 +67,12 @@ class SixthViewController: UIViewController {
             RestLabel.text = ""
             WorkoutProgressBar.progress = 1.0
             NextButton.isHidden = true
-            
+            return
+        }
+        if currExerciseIndex == exInWorkout.count - 1{
+            NextExerciseLabel.text = "Next Exercise: End of Workout"
+        } else {
+            NextExerciseLabel.text = "Next Exercise: " + exInWorkout[currExerciseIndex+1].name
         }
     }
     
@@ -89,6 +99,7 @@ class SixthViewController: UIViewController {
             if currExerciseIndex == exInWorkout.count{
                 workoutComplete = true
             }
+            dest.nextExerciseLabelText = NextExerciseLabel.text!
         }
     }
     

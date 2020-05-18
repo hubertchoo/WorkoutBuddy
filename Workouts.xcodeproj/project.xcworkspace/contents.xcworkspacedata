@@ -2,21 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/hubertchoo/Documents/Workouts/Workouts/SeventhViewController.swift">
-   </FileRef>
-   <FileRef
-      location = "group:/Users/hubertchoo/Documents/Workouts/Workouts/SRCountdownTimer.swift">
-   </FileRef>
-   <FileRef
-      location = "group:/Users/hubertchoo/Documents/Workouts/Workouts/SixthViewController.swift">
-   </FileRef>
-   <FileRef
-      location = "group:/Users/hubertchoo/Documents/Workouts/Workouts/SixthViewController.swift">
-   </FileRef>
-   <FileRef
-      location = "group:../../../Downloads/back-arrow.png">
-   </FileRef>
-   <FileRef
       location = "self:">
    </FileRef>
 </Workspace>

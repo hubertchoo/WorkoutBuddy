@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		C348990024643FB400E83343 /* FourthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34898FF24643FB400E83343 /* FourthViewController.swift */; };
-		C34899022464488E00E83343 /* StartPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34899012464488E00E83343 /* StartPageViewController.swift */; };
 		C34899042465191500E83343 /* WorkoutExerciseStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34899032465191500E83343 /* WorkoutExerciseStruct.swift */; };
 		C34899082465675900E83343 /* FifthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34899072465675900E83343 /* FifthViewController.swift */; };
 		C36953E02461489C00D6B474 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36953DF2461489C00D6B474 /* AppDelegate.swift */; };
@@ -28,7 +27,6 @@
 
 /* Begin PBXFileReference section */
 		C34898FF24643FB400E83343 /* FourthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourthViewController.swift; sourceTree = "<group>"; };
-		C34899012464488E00E83343 /* StartPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartPageViewController.swift; sourceTree = "<group>"; };
 		C34899032465191500E83343 /* WorkoutExerciseStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutExerciseStruct.swift; sourceTree = "<group>"; };
 		C34899072465675900E83343 /* FifthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FifthViewController.swift; sourceTree = "<group>"; };
 		C36953DC2461489C00D6B474 /* Workouts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Workouts.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -42,6 +40,7 @@
 		C36953EF2461489D00D6B474 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C36953FE2462B86E00D6B474 /* ThirdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdViewController.swift; sourceTree = "<group>"; };
 		C36954002462ECB200D6B474 /* ExSelectedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExSelectedTableViewCell.swift; sourceTree = "<group>"; };
+		C3A4E5812472703C00661E10 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		C3F965CC246699AF004CDBF1 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		C3F965D4246940CF004CDBF1 /* SixthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SixthViewController.swift; path = /Users/hubertchoo/Documents/Workouts/Workouts/SixthViewController.swift; sourceTree = "<absolute>"; };
 		C3F965D62469511D004CDBF1 /* SRCountdownTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SRCountdownTimer.swift; path = /Users/hubertchoo/Documents/Workouts/Workouts/SRCountdownTimer.swift; sourceTree = "<absolute>"; };
@@ -81,6 +80,7 @@
 				C36953DF2461489C00D6B474 /* AppDelegate.swift */,
 				C36953E12461489C00D6B474 /* SceneDelegate.swift */,
 				C36953E32461489C00D6B474 /* FirstViewController.swift */,
+				C3A4E5812472703C00661E10 /* README.md */,
 				C36953E52461489C00D6B474 /* SecondViewController.swift */,
 				C36953FE2462B86E00D6B474 /* ThirdViewController.swift */,
 				C34899032465191500E83343 /* WorkoutExerciseStruct.swift */,
@@ -91,7 +91,6 @@
 				C3F965D82469528B004CDBF1 /* SeventhViewController.swift */,
 				C36954002462ECB200D6B474 /* ExSelectedTableViewCell.swift */,
 				C36953E72461489C00D6B474 /* Main.storyboard */,
-				C34899012464488E00E83343 /* StartPageViewController.swift */,
 				C3F965D62469511D004CDBF1 /* SRCountdownTimer.swift */,
 				C36953EA2461489D00D6B474 /* Assets.xcassets */,
 				C36953EC2461489D00D6B474 /* LaunchScreen.storyboard */,
@@ -174,7 +173,6 @@
 				C36953E62461489C00D6B474 /* SecondViewController.swift in Sources */,
 				C36953E42461489C00D6B474 /* FirstViewController.swift in Sources */,
 				C34899082465675900E83343 /* FifthViewController.swift in Sources */,
-				C34899022464488E00E83343 /* StartPageViewController.swift in Sources */,
 				C34899042465191500E83343 /* WorkoutExerciseStruct.swift in Sources */,
 				C36953FF2462B86E00D6B474 /* ThirdViewController.swift in Sources */,
 				C3F965D72469511D004CDBF1 /* SRCountdownTimer.swift in Sources */,

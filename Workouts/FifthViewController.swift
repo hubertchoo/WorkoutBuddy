@@ -9,8 +9,6 @@ import UIKit
 
 class FifthViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate{
 
-    
-
 
     @IBOutlet weak var StartWorkoutButton: UIButton!
     @IBOutlet weak var NavItem: UINavigationItem!
@@ -25,6 +23,11 @@ class FifthViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var workoutName: String = ""
     var workoutIndex = 0
     //workoutIndex is the index of the current selected workout in the array of all workouts, 'workouts' in FirstViewController
+    
+    var allWorkouts = [[WorkoutExerciseStruct]]()
+    var allWorkoutNames = [String]()
+    // above two vars are later added in for purpose of saving for data persistence
+    
     var timer = Timer()
     
     override func viewDidLoad() {
@@ -140,6 +143,9 @@ class FifthViewController: UIViewController, UITableViewDelegate, UITableViewDat
         return .none
     }
 
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        ExInWorkoutTable.deselectRow(at: indexPath, animated: true)
+    }
 
     @IBOutlet weak var EditButton: UIButton!
     
@@ -246,8 +252,7 @@ class FifthViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @IBAction func unwindToWorkoutPage(segue: UIStoryboardSegue){
         if segue.identifier == "unwindToWorkoutPage"{
             let dest = segue.source as! FourthViewController
-            let indexPath = dest.ExForSelectionTable.indexPathForSelectedRow
-            let new_ex = WorkoutExerciseStruct(name: dest.exercises[indexPath!.row], sets: nil, reps: nil, rest: nil)
+            let new_ex = WorkoutExerciseStruct(name: dest.selectedExercise, sets: nil, reps: nil, rest: nil)
             selExercises.append(new_ex)
             ExInWorkoutTable.reloadData()
         }
@@ -294,6 +299,11 @@ class FifthViewController: UIViewController, UITableViewDelegate, UITableViewDat
             //if all fields are filled
             //edit ex_selected to update sets, reps, rest amounts
             prevSelExercises = selExercises
+            workoutName = WorkoutNameField.text!
+            allWorkouts[workoutIndex] = selExercises
+            allWorkoutNames[workoutIndex] = workoutName
+            self.save()
+            
             let alert = UIAlertController(title: "Save Successful", message: nil, preferredStyle: .alert)
             self.present(alert, animated: true, completion: nil)
 
@@ -318,6 +328,9 @@ class FifthViewController: UIViewController, UITableViewDelegate, UITableViewDat
     //returns true is any changes are yet to be saved. Does so by comparing between the current state and the previous saved state
     func hasUnsavedChanges() -> Bool {
         var result = false
+        if prevSelExercises.count != selExercises.count{
+            result = true
+        }
         if WorkoutNameField.text != workoutName{
             result = true
         }
@@ -359,6 +372,18 @@ class FifthViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func startWorkout(){
+        if selExercises.count == 0 {
+            let alert = UIAlertController(title: "No Exercises In Workout", message: nil, preferredStyle: .alert)
+            self.present(alert, animated: true, completion: nil)
+
+            let when = DispatchTime.now() + 1
+            DispatchQueue.main.asyncAfter(deadline: when){
+              // your code with delay
+              alert.dismiss(animated: true, completion: nil)
+            }
+            return
+        }
+        
         if validateFieldsFilled(){
             prevSelExercises = selExercises
             performSegue(withIdentifier: "startWorkoutSegue", sender: self)
@@ -381,6 +406,18 @@ class FifthViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
     }
     
+    func save() {
+        // save workouts
+        if let savedData = try? NSKeyedArchiver.archivedData(withRootObject: allWorkouts, requiringSecureCoding: false) {
+            let defaults = UserDefaults.standard
+            defaults.set(savedData, forKey: "workouts")
+        }
+        // save workout names
+        if let savedData = try? NSKeyedArchiver.archivedData(withRootObject: allWorkoutNames, requiringSecureCoding: false) {
+            let defaults = UserDefaults.standard
+            defaults.set(savedData, forKey: "workoutNames")
+        }
+    }
     
   /*
     override func viewWillDisappear(_ animated: Bool) {
